@@ -6,20 +6,25 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 const Form = () => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
+  const [status, setstatus] = useState(null);
   const [items, setItems] = useState([
     { label: "in-complete", value: "in-complete" },
     { label: "complete", value: "complete" },
   ]);
 
+  const [title, settitle] = useState("");
+  const [description, setdescription] = useState("");
+
   return (
-    <View style={tw`bg-slate-900 h-68 w-full pt-6 rounded-b-lg`}>
+    <View style={tw`bg-slate-900 h-72 w-full pt-6 rounded-b-lg`}>
       <TextInput
         style={[
           tw`bg-gray-50 h-12 mb-5 border border-blue-400 mx-auto rounded-md px-2`,
           { width: "94%" },
         ]}
         placeholder="Enter todo title"
+        value={title}
+        onChange={(text) => settitle(text)}
       />
       <TextInput
         style={[
@@ -27,19 +32,25 @@ const Form = () => {
           { width: "94%" },
         ]}
         placeholder="Enter todo Description"
+        value={description}
+        onChange={(text) => setdescription(text)}
       />
       <View style={tw`flex flex-row justify-between mx-4`}>
-        <View style={[tw``, { width: "50%" }]}>
+        <View style={[tw`z-10`, { width: "50%" }]}>
           <DropDownPicker
             open={open}
-            value={value}
+            value={status}
             items={items}
             setOpen={setOpen}
-            setValue={setValue}
+            setValue={setstatus}
             setItems={setItems}
           />
         </View>
-        <Pressable>
+        <Pressable
+          onPress={() =>
+            alert(`title :${title},desc : ${description},status : ${status}`)
+          }
+        >
           <View
             style={[
               tw`bg-blue-400 rounded p-2 w-36 flex items-center flex-col `,
