@@ -5,18 +5,22 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const Todo = () => {
+const Todo = ({ todo }) => {
   const [open, setOpen] = useState(false);
-  const [status, setstatus] = useState(null);
+  const [status, setstatus] = useState(todo?.status);
   const [items, setItems] = useState([
     { label: "in-complete", value: "in-complete" },
     { label: "complete", value: "complete" },
   ]);
 
-  const [title, settitle] = useState("");
-  const [description, setdescription] = useState("");
+  const [title, settitle] = useState(todo?.title);
+  const [description, setdescription] = useState(todo?.description);
 
   const [iseditopen, setiseditopen] = useState(false);
+
+  const handleEdit = () => {
+    setiseditopen(true);
+  };
 
   return (
     <View style={[tw`mx-auto border-2 border-gray-200 my-4`, { width: "94%" }]}>
@@ -26,7 +30,7 @@ const Todo = () => {
             alert("to change todo status press the todo status display below")
           }
         >
-          <Text>Lorem ipsum dolor sit amet consectetur</Text>
+          <Text>{todo?.title}</Text>
         </Pressable>
       </View>
       <Pressable
@@ -35,14 +39,14 @@ const Todo = () => {
         }
       >
         <Text style={tw`p-2`}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus
-          alias vero quod eveniet minima. Qui in odio culpa excepturi temporibus
-          dolor non? Quis placeat minus labore exercitationem eveniet voluptas
-          aut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo minus
+          provident, nam omnis praesentium quam distinctio illum placeat
+          suscipit cupiditate repudiandae ex, corporis in repellendus tempora
+          rerum amet, tempore adipisci!
         </Text>
       </Pressable>
       <View style={tw`flex flex-row justify-between p-2`}>
-        <Text style={tw`bg-amber-500 p-2 w-34 text-gray-50`}>in-complete</Text>
+        <Text style={tw`bg-amber-500 p-2 w-34 text-gray-50`}>{status}</Text>
 
         <View style={tw`flex flex-row`}>
           <Pressable onPress={() => setiseditopen((prev) => !prev)}>
@@ -55,6 +59,7 @@ const Todo = () => {
           </Text>
         </View>
       </View>
+
       {iseditopen ? (
         <View>
           <TextInput
