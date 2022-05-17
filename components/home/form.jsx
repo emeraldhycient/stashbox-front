@@ -4,6 +4,7 @@ import tw from "twrnc";
 import Entypo from "react-native-vector-icons/Entypo";
 import DropDownPicker from "react-native-dropdown-picker";
 import axios from "axios";
+import RNRestart from "react-native-restart";
 
 const Form = () => {
   const [open, setOpen] = useState(false);
@@ -30,8 +31,12 @@ const Form = () => {
         status: status,
       })
       .then((res) => {
-        //console.log(res.data);
+        console.log(res.data);
         alert(res.data.message);
+        settitle("");
+        setdescription("");
+        setstatus(null);
+        RNRestart.Restart();
       })
       .catch((err) => {
         console.log(err.response.data);

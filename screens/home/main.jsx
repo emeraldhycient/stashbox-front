@@ -18,12 +18,14 @@ const Main = () => {
       .catch((err) => {
         console.error(err.response);
       });
-  }, []);
+  }, [todos]);
 
   return (
     <>
       <Form />
-      <ScrollView style={tw`bg-white -mt-2 w-full rounded-t-lg p-4`}>
+      <ScrollView
+        style={tw`bg-white -mt-2 w-full rounded-t-lg px-4 pt-4 pb-12 mb-32`}
+      >
         <Text style={tw`text-lg font-bold text-slate-900 my-2`}>Todo's</Text>
         <View style={tw`bg-blue-400 w-10 h-1 mb-4`}></View>
         {todos.length > 0 ? (
