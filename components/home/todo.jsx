@@ -1,4 +1,4 @@
-import { View, Text, Pressable, TextInput } from "react-native";
+import { View, Text, Pressable, TextInput, Alert } from "react-native";
 import { useState } from "react";
 import tw from "twrnc";
 import axios from "axios";
@@ -21,17 +21,34 @@ const Todo = ({ todo }) => {
   const [iseditopen, setiseditopen] = useState(false);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`https://stashbox-test.herokuapp.com/api/todos/${id}`)
-      .then((res) => {
-        //console.log(res.data);
-        alert(res.data.message);
-        RNRestart.Restart();
-      })
-      .catch((err) => {
-        // console.error(err.response);
-        alert(err.response.data.message);
-      });
+    Alert.alert(
+      "Delete",
+      "Are you sure you want to delete this todo?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            axios
+              .delete(`https://stashbox-test.herokuapp.com/api/todos/${id}`)
+              .then((res) => {
+                //console.log(res.data);
+                alert(res.data.message);
+                RNRestart.Restart();
+              })
+              .catch((err) => {
+                // console.error(err.response);
+                alert(err.response.data.message);
+              });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   const handleUpdate = () => {
