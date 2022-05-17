@@ -1,13 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import Main from "./screens/home/main";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <StatusBar style="auto" />
       <Main />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -31,7 +31,7 @@ const Form = () => {
         status: status,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         alert(res.data.message);
         settitle("");
         setdescription("");
@@ -39,7 +39,7 @@ const Form = () => {
         RNRestart.Restart();
       })
       .catch((err) => {
-        console.log(err.response.data);
+        //console.log(err.response.data);
         alert(err.response.data.message);
       });
   };

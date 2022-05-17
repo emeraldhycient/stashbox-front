@@ -73,7 +73,7 @@ const Todo = ({ todo }) => {
         RNRestart.Restart();
       })
       .catch((err) => {
-        console.log(err.response.data);
+        //console.log(err.response.data);
         alert(err.response.data.message);
       });
   };
